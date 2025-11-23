@@ -1,4 +1,4 @@
-// 特殊键不需要单引号，使用 VK_ 开头的常量,在49,52,67,71,75,80行改
+// 特殊键不需要单引号，使用 VK_ 开头的常量,在43,49,52,59,67,71,75,80行改
 // 包含 windows.h 必须在定义 UNICODE 之后
 #define UNICODE
 #define _UNICODE
@@ -40,7 +40,7 @@ void SendMappedKeys(WORD vKey) {
     
     // --- 1. 根据按键发送对应字符 ---
     
-    if (vKey == VK_F6) {
+    if (vKey == VK_F6) {//vk_k6改成自己的键
         // F6: 模拟物理按键 'y' 的按下与释放（不按 Shift），
         // 以便微软拼音等输入法将其作为拼音字母接收并进入候选组合流程。
         INPUT keyPress[2];
@@ -56,7 +56,7 @@ void SendMappedKeys(WORD vKey) {
         SendInput(2, keyPress, sizeof(INPUT));
         Sleep(5);
 
-    } else if (vKey == VK_F7) {
+    } else if (vKey == VK_F7) {//KV_F7改成自己的键
         // F7 -> '^' (必须 Shift + 6)
         
         INPUT shiftSix[4];
@@ -277,3 +277,4 @@ int main() {
     return WinMain(GetModuleHandle(NULL), NULL, GetCommandLineA(), SW_SHOWNORMAL);
 
 }
+
