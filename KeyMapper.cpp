@@ -1,3 +1,4 @@
+// 特殊键不需要单引号，使用 VK_ 开头的常量,在49,52,67,71,75,80行改
 // 包含 windows.h 必须在定义 UNICODE 之后
 #define UNICODE
 #define _UNICODE
@@ -46,10 +47,10 @@ void SendMappedKeys(WORD vKey) {
         ZeroMemory(keyPress, sizeof(keyPress));
 
         keyPress[0].type = INPUT_KEYBOARD;
-        keyPress[0].ki.wVk = 'Y'; // 虚拟键码，对应键盘上的 Y 键（不按 Shift 则为小写 y）
+        keyPress[0].ki.wVk = 'Y'; // 虚拟键码，对应键盘上的 Y 键（不按 Shift 则为小写 y）,在这更改
 
         keyPress[1].type = INPUT_KEYBOARD;
-        keyPress[1].ki.wVk = 'Y';
+        keyPress[1].ki.wVk = 'Y';//在这更改
         keyPress[1].ki.dwFlags = KEYEVENTF_KEYUP;
 
         SendInput(2, keyPress, sizeof(INPUT));
@@ -63,20 +64,20 @@ void SendMappedKeys(WORD vKey) {
         
         // 1) 按下 Shift 
         shiftSix[0].type = INPUT_KEYBOARD;
-        shiftSix[0].ki.wVk = VK_SHIFT;
+        shiftSix[0].ki.wVk = VK_SHIFT;//在这更改按键,最好是组合键的第一个
 
         // 2) 按下 6
         shiftSix[1].type = INPUT_KEYBOARD;
-        shiftSix[1].ki.wVk = '6';
+        shiftSix[1].ki.wVk = '6';//在这更改,第二个组合键
 
         // 3) 释放 6
         shiftSix[2].type = INPUT_KEYBOARD;
-        shiftSix[2].ki.wVk = '6';
+        shiftSix[2].ki.wVk = '6';//在这更改,释放第二个组合键
         shiftSix[2].ki.dwFlags = KEYEVENTF_KEYUP;
         
         // 4) 释放 Shift
         shiftSix[3].type = INPUT_KEYBOARD;
-        shiftSix[3].ki.wVk = VK_SHIFT;
+        shiftSix[3].ki.wVk = VK_SHIFT;//在这更改,释放第一个组合键
         shiftSix[3].ki.dwFlags = KEYEVENTF_KEYUP;
 
         SendInput(4, shiftSix, sizeof(INPUT));
@@ -274,4 +275,5 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*lpC
 int main() {
     // 使用 GetCommandLineA() 来匹配 WinMain 的 LPSTR 参数。
     return WinMain(GetModuleHandle(NULL), NULL, GetCommandLineA(), SW_SHOWNORMAL);
+
 }
